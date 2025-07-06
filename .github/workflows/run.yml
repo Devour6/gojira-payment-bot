@@ -15,29 +15,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Cache
-        uses: actions/cache@v4
-        with:
-          path: .turbo
-          key: ${{ runner.os }}-turbo-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-turbo-
-
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: "22"
-      - uses: pnpm/action-setup@v4
 
       - name: Cache dependencies
         uses: actions/cache@v4
         with:
-          path: ~/.pnpm
-          key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: pnpm-
+          path: ~/.yarn
+          key: yarn-${{ hashFiles('yarn.lock') }}
+          restore-keys: yarn-
 
       - name: Install dependencies
-        run: pnpm install
+        run: yarn install
 
       - name: Run bot
-        run: pnpm run run
+        run: yarn run run
