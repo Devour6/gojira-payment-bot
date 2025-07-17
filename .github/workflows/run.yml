@@ -1,3 +1,5 @@
+name: saas-payment-validator-1
+
 on:
   workflow_dispatch:
   push:
